@@ -8,15 +8,15 @@ const razorpay = require('razorpay');
 const crypto = require('crypto');
 
 // Making Build Folder as Public 
-// app.use(express.static(path.join(__dirname,"./client/build")));
+app.use(express.static(path.join(__dirname,"/build")));
 
-// app.get("*",(req,res)=>
-// {
-//     res.sendFile(path.resolve(__dirname,"./client/build/index.html"))
-// })
+app.get("*",(req,res)=>
+{
+    res.sendFile(path.resolve(__dirname,"/build/index.html"))
+})
 
 app.get('/', function(req, res) {
-  res.sendFile(path.join(__dirname, './client/build', 'index.html'));
+  res.sendFile(path.join(__dirname, '/build', 'index.html'));
 });
 
 app.use(bodyParser.urlencoded({ extended: false }));
