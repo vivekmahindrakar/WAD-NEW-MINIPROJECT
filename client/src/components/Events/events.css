@@ -1,0 +1,26 @@
+.event-sections {
+    position: absolute;
+    width: 80%;
+    top: 50%;
+    display: grid;
+    grid-template-columns: auto auto;
+    margin:0 auto;
+    gap:10px;
+}
+.main-card {
+    display: inline-grid;
+    /* height: 100%;
+    width: 100%; */
+    margin-bottom: 2em;
+    padding: 10px;
+    /* border-radius: 5%; */
+    background-color: rgb(233, 233, 233);
+    /* box-shadow: 1px 10px 12px 0px #111; */
+}
+#event-heading
+{
+    position: relative;
+    top:18%;
+    font-size: 48px;
+    font-family: 'Montserrat', sans-serif;
+}

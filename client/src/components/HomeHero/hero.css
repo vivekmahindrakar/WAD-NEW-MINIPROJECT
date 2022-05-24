@@ -1,0 +1,48 @@
+.Hero-side
+{
+    position: relative;
+    width:48%;
+    height: 100vh;
+    
+    background-color: aliceblue;
+}
+@keyframes bouncy-bouncy 
+{
+    0%{transform: translateY(-20px);}  
+
+    50%{transform: translateY(-40px);}
+
+    100%{transform: translateY(-20px);} 
+}
+.Hero-side img{
+    position: relative;
+    top:15%;
+    animation: bouncy-bouncy 2s infinite;
+    
+}
+
+.Hero-side img:hover
+{
+    transition: cubic-bezier(0.785, 0.135, 0.15, 0.86) ;
+}
+#register
+{
+    position: absolute;
+    font-size: 16px;
+    border:2px solid #00ffff;
+    background-color: #00ffff;
+    left: 3%;
+    top:70%;
+    width: 22%;
+    margin: 10px 36.5%;
+    padding: 14px;
+    transition: all 0.4s ease-in;
+    color: black;
+    font-weight: 600;
+}
+#register:hover
+{
+    transform: scale(105%) translateY(-4px) ;
+    
+
+}

@@ -1,0 +1,147 @@
+*
+{
+    padding: 0%;
+    margin: 0px;
+}
+
+.navbar
+{
+    position:absolute;
+    padding: 3em 0em;
+    width: 100%;
+    height:auto;
+    color: #111;
+    z-index: 1;
+}
+
+.my-name
+{
+    width:25%;
+    height: 2em;
+    display: flex;
+    overflow-y: hidden;
+    text-align: initial;
+}
+.my-name div
+{
+    margin-right: 1em;
+}
+.my-actual-name
+{
+    transition: all 0.2s ease-in;
+    opacity: 1;
+}
+ #fname,#sname{
+    position: relative;
+    font-family: 'Comfortaa', cursive;
+    font-weight: 700;
+    transition: all 0.2s ease-in;
+}
+#sname
+{
+    color: #11cc9e;
+    top:3px;
+}
+.navigation
+{
+    display: flex;
+    justify-content: space-evenly;
+   
+
+}
+.navigation{
+    width:60%;
+    list-style-type: none;
+
+}
+ul li a{
+    text-decoration: none;
+    color:#fff;
+    transition: all 0.1s ease-in;
+    font-family: 'Montserrat';
+}
+ul li a:hover
+{
+    color:#11cc9e;
+}
+.all-links
+{
+    
+    width: 40%;
+    text-align: -web;
+}
+#logo
+{
+    height: 2em;
+    width:2em;
+}
+.container {
+    display: none;
+  }
+@media screen and (max-width:420px)
+{
+    .navbar
+    {
+        padding: 1em 0em;
+    }
+    .navigation
+    {
+        margin:0% auto;
+        display: flex;
+        flex-direction: column;
+    }
+    .links{
+        display: block;
+        margin-bottom: 1.5em;
+        margin-top: 1.5em;
+        color: black;
+    }
+    .all-links
+      {
+          position: absolute;
+          left:-170%;
+          top:5em;
+          display: block;
+          width:100%;
+          background-color: #fff;
+          transition: all 0.2s ease-in;
+          
+      }
+      ul li a
+      {
+          color: black;
+      }
+    .my-name{
+        width:70%;
+        justify-content: center;
+    }
+
+    
+    /* hamburger css */
+    .container {
+        display: inline-block;
+        cursor: pointer;
+      }
+      
+      .bar1, .bar2, .bar3 {
+        width: 35px;
+        height: 5px;
+        background-color: #333;
+        margin: 6px 0;
+        transition: 0.4s;
+        border-radius:20px;
+      }
+      
+      .change .bar1 {
+        -webkit-transform: rotate(-45deg) translate(-19px, 26px);
+        transform: rotate(-45deg) translate(-10px, 7px);
+      }
+      
+      .change .bar2 {opacity: 0;}
+      
+      .change .bar3 {
+        -webkit-transform: rotate(45deg) translate(-8px, -8px);
+        transform: rotate(45deg) translate(-7px, -7px);
+      }
+      
+}
