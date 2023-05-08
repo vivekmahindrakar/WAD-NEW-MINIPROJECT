@@ -1,6 +1,6 @@
 const express = require('express');
-const mongoose =  require('mongoose');
-const app = express()  ;
+const mongoose = require('mongoose');
+const app = express();
 
 const bodyParser = require("body-parser");
 const path = require('path');
@@ -8,34 +8,36 @@ const razorpay = require('razorpay');
 const crypto = require('crypto');
 
 // Making Build Folder as Public 
-app.use(express.static(path.join(__dirname,"/build")));
+// app.use(express.static(path.join(__dirname,"/build")));
 
-app.get("*",(req,res)=>
-{
-    res.sendFile(path.resolve(__dirname,"/build/index.html"))
-})
+// app.get("*",(req,res)=>
+// {
+//     res.sendFile(path.resolve(__dirname,"/build/index.html"))
+// })
 
-app.get('/', function(req, res) {
-  res.sendFile(path.join(__dirname, '/build', 'index.html'));
+app.get('/', function (req, res) {
+    res.sendFile(path.join(__dirname, '/build', 'index.html'));
 });
-
+app.get("/thankyou", function (req, res) {
+    res.sendFile(path.join(__dirname, '/client/src/Pages/Thankyou.js'))
+})
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json()) //this line suckssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss
 
 mongoose.connect(`mongodb+srv://ValueWealth:Vivek_2021@cluster0.hxv9z.mongodb.net/myFirstDatabase?retryWrites=true&w=majority`);
 
 const schema = mongoose.Schema({
-    FirstName : String,
-    LastName : String,
-    Type_of_event :String,
-    Email : String,
+    FirstName: String,
+    LastName: String,
+    Type_of_event: String,
+    Email: String,
 });
 
-const Participants = mongoose.model('Participant',schema);
+const Participants = mongoose.model('Participant', schema);
 
 
-app.get('/users',function (req,res) {
-    Participants.find({},function (err,foundItems) {
+app.get('/users', function (req, res) {
+    Participants.find({}, function (err, foundItems) {
         if (err) {
             console.log(err);
         } else {
@@ -43,7 +45,7 @@ app.get('/users',function (req,res) {
             return foundItems;
         }
     })
-    
+
 })
 
 // app.post('/payment',async(req,res)=>
@@ -59,7 +61,7 @@ app.get('/users',function (req,res) {
 //         {
 //             if(err)
 //             console.log(err);
-            
+
 //         })
 //     } catch (error) {
 //         console.log(error);
@@ -83,88 +85,78 @@ app.get('/users',function (req,res) {
 //     }
 // })
 
-app.post('/registerme',async(req,res)=>
-{
+app.post('/registerme', async (req, res) => {
 
 
     try {
         const instance = new razorpay({
-            key_id:"rzp_test_m7slwOIqmjEw0K",
-            key_secret:"G9WOcRztApX7N1LX815evvlh"
+            key_id: "rzp_test_m7slwOIqmjEw0K",
+            key_secret: "G9WOcRztApX7N1LX815evvlh"
 
         });
-        const options = {amount:req.body.amount * 100,currency:'INR'};
+        const options = { amount: req.body.amount * 100, currency: 'INR' };
         const orders = await instance.orders.create(options)
-        if(!orders)
-        res.status(500).send('some error occured!');
+        if (!orders)
+            res.status(500).send('some error occured!');
         res.send(order);
     } catch (error) {
-        console.log(error);
-        res.status(500).send(error)
+        // console.log(error);
+        // res.status(500).send(error)
     }
 
     const member = new Participants(
         {
-            FirstName : req.body.fname,
-        LastName : req.body.lname,
-        Type_of_event :req.body.event,
-        Email : req.body.email,
+            FirstName: req.body.fname,
+            LastName: req.body.lname,
+            Type_of_event: req.body.event,
+            Email: req.body.email,
         }
     )
-    member.save(function(err,result)
-    {
-        if(err)
-        console.log(err);
-        else
-        {
+    member.save(function (err, result) {
+        if (err)
+            console.log(err);
+        else {
             return result;
         }
-       
-    })   
+
+    })
 })
 
 
-app.post('/deleteUser',(req,res)=>
-{
+app.post('/deleteUser', (req, res) => {
     const id = req.body.key;
     console.log(id);
-    Participants.findOneAndDelete({_id:id},(err,docs)=>
-        {
-            if(err)
-            {
-                console.log(err);
-            }
-            else
-            {
-               
-                console.log(docs);
-            }
-        })
+    Participants.findOneAndDelete({ _id: id }, (err, docs) => {
+        if (err) {
+            console.log(err);
+        }
+        else {
+
+            console.log(docs);
+        }
+    })
 
 
 })
 
-app.post('/updateUser',(req,res)=>
-{
+app.post('/updateUser', (req, res) => {
     id = req.body.key;
     fname = req.body.fname;
     email = req.body.email;
     lname = req.body.lname;
 
     // console.log(id+fname+email+lname);
-    Participants.findByIdAndUpdate({_id:id},{FirstName:fname,LastName:lname,Email:email},{upsert:true},(err,doc)=>
-    {
-        if(err)
-        res.status(500).send(err);
+    Participants.findByIdAndUpdate({ _id: id }, { FirstName: fname, LastName: lname, Email: email }, { upsert: true }, (err, doc) => {
+        if (err)
+            res.status(500).send(err);
         else
-        res.send(doc);
+            res.send(doc);
     });
-    
+
     //res.send(doc)
 })
 
-app.post('/get-specific-user',(req,res)=>
-{
+app.post('/get-specific-user', (req, res) => {
     // Participants.find({_id:req.body.id},(err,doc)=>
     // {
     //     if(err)
@@ -175,9 +167,9 @@ app.post('/get-specific-user',(req,res)=>
     console.log(req.body.id);
 })
 
-const port = process.env.PORT||4000;
+const port = process.env.PORT || 4000;
 
-app.listen(port,function (req,res) {
+app.listen(port, function (req, res) {
     console.log("listening on port 4000");
-    
+
 })
